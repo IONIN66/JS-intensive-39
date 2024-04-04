@@ -4,3 +4,5 @@ function sayHello() {
 
 sayHello();
 
+let name = "Vova";
+
