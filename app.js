@@ -6,3 +6,4 @@ sayHello();
 
 let name = "Vova";
 
+let age = 25;
