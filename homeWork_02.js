@@ -89,7 +89,7 @@ const obj2 = {
 const deepEqual = (obj1, obj2) => {
 
     if (typeof obj1 !== 'object' || typeof obj2 !== 'object') {
-        return obj1 === obj2;
+        return false;
     }
 
     const keysFirstObj = Object.keys(obj1);
