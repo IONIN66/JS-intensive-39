@@ -69,4 +69,43 @@ delayedIndexPrint([10, 12, 15, 21])
 
 // 4) Прочитать про Top Level Await (можно ли использовать await вне функции async)
 
- //Ответ: сделано.
+//Ответ: сделано.
+
+// БОНУС ЗАДАНИЕ 
+/* Необходимо реализовать функцию fetchUrl, которая будет 
+использоваться следующим образом.
+Внутри fetchUrl можно использовать условный метод fetch,
+который просто возвращает
+Promise с содержимым страницы или вызывает reject
+fetchUrl('https://google/com&#39;)
+.then(...)
+.catch(...) // сatch должен сработать только после 5 неудачных попыток
+получить содержимое страницы внутри fetchUrl 
+*/
+
+async function fetchUrl(url) {
+    let maximumAttempts = 0;
+    const maxAttemptsAllowed = 5;
+    while (maximumAttempts < maxAttemptsAllowed) {
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                return await response.json();
+            }
+        } 
+        catch (error) {
+            maximumAttempts++;
+            if (maximumAttempts === maxAttemptsAllowed) {
+                throw new Error('More than 5 attempts');
+            }
+        }
+    }
+}
+
+fetchUrl('https://google.com')
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error(error.message);
+    });
